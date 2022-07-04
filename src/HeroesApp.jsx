@@ -4,8 +4,6 @@ export const HeroesApp = () => {
 	return (
 		<>
 			<AppRouter />
-
-			<hr />
 		</>
 	);
 };
