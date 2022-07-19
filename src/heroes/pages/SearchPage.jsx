@@ -22,7 +22,7 @@ export const SearchPage = () => {
 	const handleSearchSubmit = (e) => {
 		e.preventDefault();
 
-		navigate(`?q=${search.toLowerCase().trim()}`)
+		navigate(`?q=${search.toLowerCase().trim()}`);
 	};
 
 	return (
@@ -37,7 +37,7 @@ export const SearchPage = () => {
 
 					<hr />
 
-					<form onSubmit={handleSearchSubmit}>
+					<form onSubmit={handleSearchSubmit} aria-label="form">
 						<input
 							className="form-control"
 							type="text"
@@ -72,11 +72,18 @@ export const SearchPage = () => {
 							)
 					} */}
 
-					<div className="alert alert-primary animate__animated animate__fadeInLeft" style={{ display: showSearch ? "" : "none" }}>
+					<div
+						className="alert alert-primary animate__animated animate__fadeInLeft"
+						style={{ display: showSearch ? "" : "none" }}
+					>
 						Search a hero...
 					</div>
 
-					<div className="alert alert-danger animate__animated animate__fadeInLeft" style={{ display: showError ? "" : "none" }}>
+					<div
+						className="alert alert-danger animate__animated animate__fadeInLeft"
+						style={{ display: showError ? "" : "none" }}
+						aria-label="not-found-hero-alert"
+					>
 						There's no hero with <b>{q}</b>
 					</div>
 
