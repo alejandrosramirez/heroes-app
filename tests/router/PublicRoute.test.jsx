@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "../../src/auth";
 import { PublicRoute } from "../../src/router";
 
@@ -9,7 +9,7 @@ describe("Pruebas en <PublicRoute />", () => {
 			logged: false,
 		};
 		render(
-			<AuthContext.Provider value={{ value }}>
+			<AuthContext.Provider value={value}>
 				<PublicRoute>
 					<h1>Ruta pública</h1>
 				</PublicRoute>
@@ -27,14 +27,25 @@ describe("Pruebas en <PublicRoute />", () => {
 			},
 		};
 		render(
-			<AuthContext.Provider value={{ value }}>
-				<MemoryRouter>
-					<PublicRoute>
-						<h1>Ruta pública</h1>
-					</PublicRoute>
+			<AuthContext.Provider value={value}>
+				<MemoryRouter initialEntries={["/login"]}>
+					<Routes>
+						<Route
+							path="/login"
+							element={
+								<PublicRoute>
+									<h1>Ruta pública</h1>
+								</PublicRoute>
+							}
+						/>
+						<Route
+							path="/marvel"
+							element={<h1>Página Marvel</h1>}
+						/>
+					</Routes>
 				</MemoryRouter>
 			</AuthContext.Provider>
 		);
-
+		expect(screen.getByText("Página Marvel")).toBeTruthy();
 	});
 });
